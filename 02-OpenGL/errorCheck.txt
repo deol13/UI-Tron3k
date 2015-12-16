@@ -1,0 +1,3 @@
+ERROR: 0:13: 'fragment_color' : undeclared identifier 
+ERROR: 0:13: 'assign' :  cannot convert from 'const 4-component vector of float' to 'float'
+

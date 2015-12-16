@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Test Class">
+      <UniqueIdentifier>{c517e2f9-6c25-4980-942b-d67378e3d367}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UI">
+      <UniqueIdentifier>{8b534967-9e4f-45f3-8b46-7f804f80d3e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\stb Files">
+      <UniqueIdentifier>{a5a4c9b7-a2b4-4b67-b004-e35a335a6cc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Shaders">
+      <UniqueIdentifier>{aae9a510-40ba-46d2-a11e-ef14d1cae262}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Structs">
+      <UniqueIdentifier>{6b6a6d55-2d1a-40e6-9c17-8bdcd3e3681b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Render">
+      <UniqueIdentifier>{e1b99447-544b-4268-a3ed-451e2a03cbd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UI\ScreenObj">
+      <UniqueIdentifier>{0a96ed61-080b-4582-ab64-3e65598f2044}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestClass.cpp">
+      <Filter>Source Files\Test Class</Filter>
+    </ClCompile>
+    <ClCompile Include="stb_image.c">
+      <Filter>Source Files\stb Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UIShader.cpp">
+      <Filter>Source Files\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="Render.cpp">
+      <Filter>Source Files\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="UIManager.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Source Files\UI\ScreenObj</Filter>
+    </ClCompile>
+    <ClCompile Include="Slider.cpp">
+      <Filter>Source Files\UI\ScreenObj</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="staticBox.cpp">
+      <Filter>Source Files\UI\ScreenObj</Filter>
+    </ClCompile>
+    <ClCompile Include="InputBox.cpp">
+      <Filter>Source Files\UI\ScreenObj</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TestClass.h">
+      <Filter>Source Files\Test Class</Filter>
+    </ClInclude>
+    <ClInclude Include="stb_image.h">
+      <Filter>Source Files\stb Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UIShader.h">
+      <Filter>Source Files\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexBufferUI.h">
+      <Filter>Source Files\Structs</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertex.h">
+      <Filter>Source Files\Structs</Filter>
+    </ClInclude>
+    <ClInclude Include="Render.h">
+      <Filter>Source Files\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="UIManager.h">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Source Files\UI\ScreenObj</Filter>
+    </ClInclude>
+    <ClInclude Include="Slider.h">
+      <Filter>Source Files\UI\ScreenObj</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="staticBox.h">
+      <Filter>Source Files\UI\ScreenObj</Filter>
+    </ClInclude>
+    <ClInclude Include="InputBox.h">
+      <Filter>Source Files\UI\ScreenObj</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
