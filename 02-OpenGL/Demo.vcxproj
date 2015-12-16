@@ -83,6 +83,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="DynamicTextBox.cpp" />
     <ClCompile Include="InputBox.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Render.cpp" />
@@ -96,6 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Button.h" />
+    <ClInclude Include="DynamicTextBox.h" />
     <ClInclude Include="InputBox.h" />
     <ClInclude Include="Render.h" />
     <ClInclude Include="Slider.h" />

@@ -3,6 +3,7 @@
 Slider::Slider() {}
 Slider::~Slider() {}
 
+void Slider::addBox(int size, glm::vec3* positions, int* texId, int objId) {}
 
 void Slider::setWorldMatirx() {}
 glm::vec3 Slider::returnPositions() {}
