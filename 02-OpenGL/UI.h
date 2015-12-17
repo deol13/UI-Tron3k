@@ -4,7 +4,7 @@
 
 #include "Button.h"
 #include "Slider.h"
-#include "StaticText.h"
+#include "staticBox.h"
 
 #include <vector>
 #include <string>
@@ -17,7 +17,7 @@ class UI
 private:
 	Button* buttons;
 	Slider* sliders;
-	StaticText* staticText;
+	StaticBox* staticText;
 
 	int* objIdList;
 	int* texIdList;
