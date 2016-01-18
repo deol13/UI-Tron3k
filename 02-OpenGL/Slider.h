@@ -21,11 +21,14 @@ public:
 	void addBox(int size, glm::vec3* positions, int* texId, int objId);
 
 
-	void setWorldMatirx();
-	glm::vec3 returnPositions();
+	void setWorldMatirx(float x, float y);
 	glm::mat4 returnWorldMatrix();
 
 	int calcSound();
+
+	bool checkCollision(glm::vec2 pos);
 };
 
 #endif
+
+//Sätt button direkt dit spelaren klickade.

@@ -10,3 +10,5 @@ glm::vec3 Slider::returnPositions() {}
 glm::mat4 Slider::returnWorldMatrix() {}
 
 int Slider::calcSound() {}
+
+bool Slider::checkCollision(glm::vec2 pos){}

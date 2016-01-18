@@ -2,6 +2,8 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 
+#include "Vertex.h"
+
 #include <glm\glm.hpp>
 #include <glm\gtc\matrix_transform.hpp>
 
@@ -9,24 +11,26 @@ class Button
 {
 private:
 	int size;
-	glm::vec3* pos;
-	int texId;
+	Vertex* pos;
+	int* texList;
+	int texInUse;
 	int objId;
+	int uniqueKey;
 	glm::mat4 worldMatrix;
 
 public:
 	Button();
-	Button(int size, glm::vec3* positions, int* texId, int objId);
+	Button(int size, glm::vec2 positions, glm::vec2 uv, int* texList, int objId, int uniqueKey);
 	~Button();
 
-	void setWorldMatirx();
+	void setWorldMatrix(float x, float y);
 	glm::mat4 returnWorldMatrix();
-	glm::vec3* returnPositions();
 	
-	void changeTexUsed();
+	void changeTexUsed(int use);
 
-	void scalePositions(int scale);
+	void scalePositions(int scaleX, int scaleY);
 
+	int checkCollision(glm::vec2 pos);
 };
 
 #endif

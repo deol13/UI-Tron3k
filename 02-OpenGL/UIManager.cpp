@@ -28,15 +28,21 @@ void UIManager::init(std::string* fileNames, int nrOfFiles)
 }
 
 //Add and remove menus
-void UIManager::addMenu(int id) 
+bool UIManager::addMenu(int fileId) 
 {
+	bool result = false; 
+
 	if (nrOfMenus < maxMenus)
 	{
-		if (id < nrOfFileNames)
+		if (fileId >= 0 && fileId < nrOfFileNames)
 		{
-			menus[nrOfMenus].loadUI(fileNamesList[id]);
+			if (menus == nullptr)
+				menus = new UI[maxMenus];
+
+			menus[nrOfMenus].loadUI(fileNamesList[fileId]);
 
 			nrOfMenus++;
+			result = true;
 		}
 		//else
 		//	std::cout << "Error: File name id out of range." << std::endl;
@@ -44,13 +50,48 @@ void UIManager::addMenu(int id)
 	//else
 	//	std::cout << "Error: Max menus opened already." << std::endl;
 
-	
+	return ;
 }
-void UIManager::removeMenu(int menuId) 
+bool UIManager::removeMenu(int menuId) 
 {
+	bool result = false;
 
+	if (nrOfMenus > 0)
+	{
+		if (menuId >= 0 && menuId < nrOfMenus)
+		{
+			menus[menuId].clean();
+
+			for (int i = menuId; i < nrOfMenus-1; i++)
+			{
+				menus[i] = menus[i + 1];
+				menus[i].changeMenuId();
+			}
+
+			nrOfMenus--;
+			result = true;
+		}
+		//else
+		//	std::cout << "Error: MenuId is out of range." << std::endl;
+	}
+	//else
+	//	std::cout << "Error: No menus to remove." << std::endl;
+
+	return;
 }
 void UIManager::removeAllMenus() 
 {
+	for (int i = 0; i < nrOfMenus; i++)
+	{
+		menus[i].clean();
+	}
+	nrOfMenus = 0;
 
+	delete menus;
+	menus = nullptr;
+}
+
+int UIManager::collisionCheck(glm::vec2 pos, int whichMenu)
+{
+	return menus[whichMenu].mouseCollission(pos);
 }

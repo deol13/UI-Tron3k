@@ -71,7 +71,7 @@ void Render::uiRenderPass()
 		printf("Error");
 }
 
-void Render::cleanUp(int id)
+void Render::cleanUp(int id) //Needs to be put together with UIManager clean up
 {
 	if (id == -1) //Remove all the buffers
 	{
@@ -98,7 +98,7 @@ void Render::cleanUp(int id)
 	}
 }
 
-void Render::newBuffers(int objCount, int textureIdList[])
+void Render::newBuffers(int objCount, int textureIdList[]) //Needs to changed
 {
 	//Check so we are not going over the limit of opened menues.
 	if (nrOfMenus + 1 <= 4)
@@ -130,7 +130,7 @@ void Render::createBuffers(int id)
 	//create buffer and set data
 	glGenBuffers(1, &vertexRenderBuffers[currentMenu].gVertexBuffer[id]);
 	glBindBuffer(GL_ARRAY_BUFFER, vertexRenderBuffers[currentMenu].gVertexBuffer[id]);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * 4, &tester[id].posList[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * 4, &tester[id].posList[0], GL_STATIC_DRAW); // &tester[id].posList[0] bytt ut mot UIs buttons Vertex
 
 	//define vertex data layout
 	glGenVertexArrays(1, &vertexRenderBuffers[currentMenu].gVertexAttribute[id]);

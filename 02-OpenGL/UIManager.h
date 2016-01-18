@@ -23,9 +23,11 @@ public:
 	void init(std::string* fileNames, int nrOfFiles);
 
 	//Add and remove menus
-	void addMenu(int id);
-	void removeMenu(int menuId);
+	bool addMenu(int fileId);
+	bool removeMenu(int menuId);
 	void removeAllMenus();
+
+	int collisionCheck(glm::vec2 pos, int whichMenu);
 };
 
 #endif
