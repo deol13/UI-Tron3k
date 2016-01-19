@@ -56,7 +56,7 @@ int WINAPI wWinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdL
 		SetViewport(); //4. Sätt viewport
 
 		/************Test to see if the program works***********/
-		testData();
+		//testData();
 		
 		render = new Render();
 		render->init(tester);
@@ -200,36 +200,36 @@ HGLRC CreateOpenGLContext(HWND wndHandle)
 }
 
 
-void testData()
-{
-	objOne[0] = Vertex(-1.0f, 1.0f, 0.0f, 0.0f, 1.0f);
-	objOne[1] = Vertex(-1.0f, 0.75f, 0.0f, 0.0f, 0.0f);
-	objOne[2] = Vertex(-0.75f, 1.0f, 0.0f , 1.0f, 1.0f);
-	objOne[3] = Vertex(-0.75f, 0.75f, 0.0f, 1.0f, 0.0f);
-
-	objTwo[0] = Vertex(-0.125f, 0.125f, 0.0f, 0.0f, 1.0f);
-	objTwo[1] = Vertex(-0.125f, -0.125f, 0.0f, 0.0f, 0.0f);
-	objTwo[2] = Vertex(0.125f, 0.125f, 0.0f, 1.0f, 1.0f);
-	objTwo[3] = Vertex(0.125f, -0.125f, 0.0f, 1.0f, 0.0f);
-
-	objThree[0] = Vertex(0.75f, -0.75f, 0.0f, 0.0f, 1.0f);
-	objThree[1] = Vertex(0.75f, -1.0f, 0.0f, 0.0f, 0.0f);
-	objThree[2] = Vertex(1.0f, -0.75f, 0.0f, 1.0f, 1.0f);
-	objThree[3] = Vertex(1.0f, -1.0f, 0.0f, 1.0f, 0.0f);
-
-	objFour[0] = Vertex(0.75f, 1.0f, 0.0f, 0.0f, 1.0f);
-	objFour[1] = Vertex(0.75f, 0.75f, 0.0f, 0.0f, 0.0f);
-	objFour[2] = Vertex(1.0f, 1.0f, 0.0f, 1.0f, 1.0f);
-	objFour[3] = Vertex(1.0f, 0.75f, 0.0f, 1.0f, 0.0f);
-
-	objFive[0] = Vertex(-1.0f, -0.75f, 0.0f, 0.0f, 1.0f);
-	objFive[1] = Vertex(-1.0f, -1.0f, 0.0f, 0.0f, 0.0f);
-	objFive[2] = Vertex(-0.75f, -0.75f, 0.0f, 1.0f, 1.0f);
-	objFive[3] = Vertex(-0.75f, -1.0f, 0.0f, 1.0f, 0.0f);
-	
-	tester[0].init(objOne);
-	tester[1].init(objTwo);
-	tester[2].init(objThree);
-	tester[3].init(objFour);
-	tester[4].init(objFive);
-}
+//void testData()
+//{
+//	objOne[0] = Vertex(-1.0f, 1.0f, 0.0f, 0.0f, 1.0f);
+//	objOne[1] = Vertex(-1.0f, 0.75f, 0.0f, 0.0f, 0.0f);
+//	objOne[2] = Vertex(-0.75f, 1.0f, 0.0f , 1.0f, 1.0f);
+//	objOne[3] = Vertex(-0.75f, 0.75f, 0.0f, 1.0f, 0.0f);
+//
+//	objTwo[0] = Vertex(-0.125f, 0.125f, 0.0f, 0.0f, 1.0f);
+//	objTwo[1] = Vertex(-0.125f, -0.125f, 0.0f, 0.0f, 0.0f);
+//	objTwo[2] = Vertex(0.125f, 0.125f, 0.0f, 1.0f, 1.0f);
+//	objTwo[3] = Vertex(0.125f, -0.125f, 0.0f, 1.0f, 0.0f);
+//
+//	objThree[0] = Vertex(0.75f, -0.75f, 0.0f, 0.0f, 1.0f);
+//	objThree[1] = Vertex(0.75f, -1.0f, 0.0f, 0.0f, 0.0f);
+//	objThree[2] = Vertex(1.0f, -0.75f, 0.0f, 1.0f, 1.0f);
+//	objThree[3] = Vertex(1.0f, -1.0f, 0.0f, 1.0f, 0.0f);
+//
+//	objFour[0] = Vertex(0.75f, 1.0f, 0.0f, 0.0f, 1.0f);
+//	objFour[1] = Vertex(0.75f, 0.75f, 0.0f, 0.0f, 0.0f);
+//	objFour[2] = Vertex(1.0f, 1.0f, 0.0f, 1.0f, 1.0f);
+//	objFour[3] = Vertex(1.0f, 0.75f, 0.0f, 1.0f, 0.0f);
+//
+//	objFive[0] = Vertex(-1.0f, -0.75f, 0.0f, 0.0f, 1.0f);
+//	objFive[1] = Vertex(-1.0f, -1.0f, 0.0f, 0.0f, 0.0f);
+//	objFive[2] = Vertex(-0.75f, -0.75f, 0.0f, 1.0f, 1.0f);
+//	objFive[3] = Vertex(-0.75f, -1.0f, 0.0f, 1.0f, 0.0f);
+//	
+//	tester[0].init(objOne);
+//	tester[1].init(objTwo);
+//	tester[2].init(objThree);
+//	tester[3].init(objFour);
+//	tester[4].init(objFive);
+//}

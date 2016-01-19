@@ -30,17 +30,17 @@ Render::~Render()
 
 void Render::init(TestClass tester[])
 {
-	this->tester[0] = tester[0];
-	this->tester[1] = tester[1];
-	this->tester[2] = tester[2];
-	this->tester[3] = tester[3];
-	this->tester[4] = tester[4];
-
 	//Load all the textures
 	loadTextures();
 	
+	std::string* txtFileName = new std::string("test.txt");
+
 	/*Start Menu*/
-	//newBuffers();
+	manager.init(txtFileName, textureCount);
+	manager.addMenu(0);
+	newBuffers(manager.returnObjCount(), manager.returnTextureList());
+
+	delete txtFileName;
 }
 
 void Render::update() {}
@@ -58,6 +58,7 @@ void Render::uiRenderPass()
 
 		//Texture Sample sent to the gpu
 		glProgramUniform1i(gShaderUI, uiShader->texture, i);
+		glProgramUniformMatrix4fv(gShaderUI, uiShader->worldMatrix, 1, GL_FALSE, &manager.returnWorldMatrix(i)[0][0]);
 
 		//Bind the vertex buffer that will be used
 		glBindVertexArray(vertexRenderBuffers[currentMenu].gVertexAttribute[i]);
@@ -130,7 +131,7 @@ void Render::createBuffers(int id)
 	//create buffer and set data
 	glGenBuffers(1, &vertexRenderBuffers[currentMenu].gVertexBuffer[id]);
 	glBindBuffer(GL_ARRAY_BUFFER, vertexRenderBuffers[currentMenu].gVertexBuffer[id]);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * 4, &tester[id].posList[0], GL_STATIC_DRAW); // &tester[id].posList[0] bytt ut mot UIs buttons Vertex
+	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * 4, &manager.returnPosAUv(currentMenu)[0], GL_STATIC_DRAW); // &tester[id].posList[0] bytt ut mot UIs buttons Vertex
 
 	//define vertex data layout
 	glGenVertexArrays(1, &vertexRenderBuffers[currentMenu].gVertexAttribute[id]);
@@ -139,9 +140,9 @@ void Render::createBuffers(int id)
 	glEnableVertexAttribArray(1);
 
 	GLint vertexPos = glGetAttribLocation(gShaderUI, "vertex_position");
-	glVertexAttribPointer(vertexPos, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(0));
+	glVertexAttribPointer(vertexPos, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(0));
 	GLint vertexUV = glGetAttribLocation(gShaderUI, "vertex_uv");
-	glVertexAttribPointer(vertexUV, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(sizeof(float) * 3));
+	glVertexAttribPointer(vertexUV, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), BUFFER_OFFSET(sizeof(float) * 2));
 
 	GLenum error = glGetError();
 	if (error != GL_NO_ERROR)

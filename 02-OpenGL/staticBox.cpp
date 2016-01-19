@@ -1,10 +1,21 @@
 #include "staticBox.h"
 
 StaticBox::StaticBox() {}
-StaticBox::StaticBox(int size, glm::vec3* positions, int* texId, int objId) {}
+StaticBox::StaticBox(glm::vec2 positions[2], glm::vec2 UVs[2], int texId, int objId) {}
 StaticBox::~StaticBox() {}
 
-glm::vec3* StaticBox::returnPositions() {}
+void StaticBox::setWorldMatrix(float x, float y)
+{
+
+}
+glm::mat4 StaticBox::returnWorldMatrix()
+{
+	return worldMatrix;
+}
+Vertex* StaticBox::returnPosAUv()
+{
+	return pos;
+}
 
 void StaticBox::changeTexUsed() {}
 

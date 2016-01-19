@@ -7,6 +7,7 @@
 #include "staticBox.h"
 #include "InputBox.h"
 #include "DynamicTextBox.h"
+#include "Vertex.h"
 
 #include <vector>
 #include <string>
@@ -28,6 +29,7 @@ private:
 	//InputBox* inputBoxes;
 
 	int* objIdList; //Used to change from the renders list to UI's list of objects.
+	int* textureList;
 
 	int nrOfbuttons;
 	int nrOfsliders;
@@ -51,7 +53,11 @@ public:
 
 	void setWorldMatrix(float x, float y, int objId);
 	glm::mat4 returnWorldMatrix(int objId);
+	Vertex* returnPosAUv(int id);
+	int* returnTextureList();
+	int returnObjCount();
 
+	//Hover function, den ska ändra på textureList eftersom en buttons texture ändras
 };
 
 #endif

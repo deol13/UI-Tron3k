@@ -7,7 +7,7 @@
 #include <string>
 #include <vector>
 #include "VertexBufferUI.h"
-
+#include "UIManager.h"
 //Test
 #include "TestClass.h"
 #include "stb_image.h"
@@ -36,6 +36,8 @@ private:
 	int currentMenu; //Which menu should be rendered
 	int nrOfButtons; //How many "buttons" the current menu have
 	int nrOfMenus; //Total of menus open att the moment
+
+	UIManager manager;
 public:
 	Render();
 	~Render();

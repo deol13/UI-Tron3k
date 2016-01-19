@@ -22,6 +22,7 @@ public:
 
 	void setWorldMatrix(float x, float y);
 	glm::mat4 returnWorldMatrix();
+	Vertex* returnPosAUv();
 
 	void changeTexUsed();
 

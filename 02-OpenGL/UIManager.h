@@ -12,6 +12,7 @@ private:
 	UI* menus;
 	int nrOfMenus;
 	int maxMenus;
+	int currentMenu;
 
 	std::string* fileNamesList;
 	int nrOfFileNames;
@@ -28,6 +29,11 @@ public:
 	void removeAllMenus();
 
 	int collisionCheck(glm::vec2 pos, int whichMenu);
+
+	int returnObjCount();
+	Vertex* returnPosAUv(int id);
+	int* returnTextureList();
+	glm::mat4 returnWorldMatrix(int id);
 };
 
 #endif

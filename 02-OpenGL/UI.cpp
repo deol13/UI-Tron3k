@@ -9,6 +9,7 @@ UI::UI()
 	//inputBoxes = nullptr;
 
 	objIdList = nullptr;
+	textureList = nullptr;
 
 	nrOfbuttons = 0;
 	nrOfsliders = 0;
@@ -49,8 +50,10 @@ void UI::changeMenuId()
 
 bool UI::loadUI(std::string fileName) 
 {
+	bool result = false;
+
 	std::ifstream myfile;
-	myfile.open("Resource/" + fileName);
+	myfile.open(fileName);
 	
 	if (myfile.is_open())
 	{
@@ -91,8 +94,9 @@ bool UI::loadUI(std::string fileName)
 
 		//Allocate memory
 		objIdList = new int[nrOfObjects];
-		
-		while (myfile.eof) //Looping through the file until there is nothing left to read.
+		textureList = new int[nrOfObjects];
+
+		while (myfile.eof()) //Looping through the file until there is nothing left to read.
 		{
 			getline(myfile, inputString); //Get the class key to see which class object that needs to be created.
 			convertedResult = std::stoi(inputString);
@@ -103,18 +107,19 @@ bool UI::loadUI(std::string fileName)
 				std::string temp;
 				glm::vec2 xy[4];
 				glm::vec2 uv[4];
+				std::stringstream ss("");
 
 				for (int i = 0; i < 4; i++)
 				{
 					getline(myfile, inputString); //X, Y
-					std::stringstream ss(inputString);
+					ss = std::stringstream(inputString);
 					ss >> temp;
 					x = std::stoi(temp);
 					ss >> temp;
 					y = std::stoi(temp);
 
 					getline(myfile, inputString); //U, V
-					std::stringstream ss(inputString);
+					ss = std::stringstream(inputString);
 					ss >> temp;
 					u = std::stoi(temp);
 					ss >> temp;
@@ -122,6 +127,7 @@ bool UI::loadUI(std::string fileName)
 
 					xy[i] = glm::vec2(x, y);
 					uv[i] = glm::vec2(u, v);
+					xy[i] = fileCoordToScreenSpace(xy[i]);
 				}
 
 					getline(myfile, inputString); //tex1
@@ -136,15 +142,25 @@ bool UI::loadUI(std::string fileName)
 				if (convertedResult == 0)
 				{
 					buttons[counterButtons] = Button(xy, uv, tex1, tex2, counter, uniqueKey);
+					buttons[counterButtons].scalePositions(scale);
 					objIdList[counter] = counterButtons;
+					textureList[counter] = tex1;
 					counterButtons++;
+					result = true;
 				}
 				else
 				{
 					//SLider
 					sliders[counterSliders] = Slider(xy, uv, tex1, tex2, counter, uniqueKey);
+					sliders[counterButtons].scalePositions(scale);
 					objIdList[counter] = counterSliders;
+					textureList[counter] = tex1;
+					counter++;
+					//Button 2 that will be made in the slider class
+					objIdList[counter] = counterSliders;
+					textureList[counter] = tex2;
 					counterSliders++;
+					result = true;
 				}
 			}
 			else if (convertedResult == 2) //StaticText class
@@ -152,18 +168,19 @@ bool UI::loadUI(std::string fileName)
 				std::string temp;
 				glm::vec2 xy[4];
 				glm::vec2 uv[4];
+				std::stringstream ss("");
 
 				for (int i = 0; i < 4; i++)
 				{
 					getline(myfile, inputString); //X, Y
-					std::stringstream ss(inputString);
+					ss = std::stringstream(inputString);
 					ss >> temp;
 					x = std::stoi(temp);
 					ss >> temp;
 					y = std::stoi(temp);
 
 					getline(myfile, inputString); //U, V
-					std::stringstream ss(inputString);
+					ss = std::stringstream(inputString);
 					ss >> temp;
 					u = std::stoi(temp);
 					ss >> temp;
@@ -180,20 +197,25 @@ bool UI::loadUI(std::string fileName)
 				scale = std::stoi(inputString);
 
 				staticText[counterStaticText] = StaticBox(xy, uv, tex1, counter);
+				staticText[counterStaticText].scalePositions(scale);
 				objIdList[counter] = counterStaticText;
+				textureList[counter] = tex1;
 				counterStaticText++;
+				result = true;
 			}
 			else if (convertedResult == 3) //DynamicTextBox class
 			{
 
 				objIdList[counter] = counterDynamicBox;
 				counterDynamicBox++;
+				result = true;
 			}
 			else if (convertedResult == 4) //InputBox class
 			{
 
 				objIdList[counter] = counterInputBoxes;
 				counterInputBoxes++;
+				result = true;
 			}
 			else //Error message.
 			{
@@ -207,6 +229,8 @@ bool UI::loadUI(std::string fileName)
 		//std::cout << "Error: File could not be opened." << std::endl;
 
 	myfile.close();
+
+	return result;
 }
 
 int UI::mouseCollission(glm::vec2 pos) 
@@ -254,6 +278,8 @@ int UI::collisionEvent(int UniqueKey) //Every button in every menu have a unique
 		result = UniqueKey;
 		break;
 	}
+
+	return result;
 }
 
 glm::vec2 UI::fileCoordToScreenSpace(glm::vec2 pos)
@@ -272,5 +298,43 @@ void UI::setWorldMatrix(float x, float y, int objId)
 }
 glm::mat4 UI::returnWorldMatrix(int objId)
 {
-	return sliders[objIdList[objId]].returnWorldMatrix();
+	return sliders[objIdList[objId]].returnWorldMatrix(objId);
+}
+
+Vertex* UI::returnPosAUv(int id)
+{
+	int index = objIdList[id];
+
+	Vertex* tmp = nullptr;
+	
+	if (index >= 0 && index < nrOfbuttons)
+	{
+		tmp = buttons[index].returnPosAUv();
+	}
+	else if (index >= nrOfbuttons && index < nrOfsliders)
+	{
+		tmp = sliders[index].returnPosAUv(id);
+	}
+	else if (index >= nrOfsliders && index < nrOfstaticText)
+	{
+		tmp = staticText[index].returnPosAUv();
+	}
+	else if (index >= nrOfstaticText && index < nrOfdynamicTextBoxes)
+	{
+		//tmp = dynamicTextBoxes[index].returnPosition();
+	}
+	else if (index >= nrOfdynamicTextBoxes && index < nrOfinputBoxes)
+	{
+		//tmp = inputBoxes[index].returnPosition();
+	}
+
+	return tmp;
+}
+int* UI::returnTextureList()
+{
+	return textureList;
+}
+int UI::returnObjCount()
+{
+	return nrOfObjects;
 }

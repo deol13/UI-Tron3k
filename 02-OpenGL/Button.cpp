@@ -42,9 +42,20 @@ glm::mat4 Button::returnWorldMatrix()
 	return worldMatrix;
 }
 
-void Button::changeTexUsed(int use) 
+Vertex* Button::returnPosAUv()
+{
+	return pos;
+}
+
+int Button::returnObjId()
+{
+	return objId;
+}
+
+int Button::changeTexUsed(int use) 
 {
 	texInUse = texList[use];
+	return texInUse;
 }
 
 void Button::scalePositions(int scale) 

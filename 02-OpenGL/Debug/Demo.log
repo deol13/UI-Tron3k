@@ -1,41 +1,32 @@
-﻿Build started 2016-01-18 10:53:10.
+﻿Build started 2016-01-19 16:55:14.
      1>Project "C:\Users\Dennis Olsen\Documents\GitHub\UI-Tron3k\02-OpenGL\Demo.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Iglm /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt Button.cpp DynamicTextBox.cpp InputBox.cpp main.cpp Render.cpp Slider.cpp staticBox.cpp TestClass.cpp UI.cpp UIManager.cpp UIShader.cpp
-         UIShader.cpp
-         UIManager.cpp
-     1>c:\users\dennis olsen\documents\github\ui-tron3k\02-opengl\uimanager.cpp(24): warning C4018: '<': signed/unsigned mismatch
-     1>c:\users\dennis olsen\documents\github\ui-tron3k\02-opengl\uimanager.cpp(53): error C2561: 'UIManager::addMenu': function must return a value
-         c:\users\dennis olsen\documents\github\ui-tron3k\02-opengl\uimanager.cpp(31): note: see declaration of 'UIManager::addMenu'
-     1>c:\users\dennis olsen\documents\github\ui-tron3k\02-opengl\uimanager.cpp(80): error C2561: 'UIManager::removeMenu': function must return a value
-         c:\users\dennis olsen\documents\github\ui-tron3k\02-opengl\uimanager.cpp(55): note: see declaration of 'UIManager::removeMenu'
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Iglm /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt UI.cpp
          UI.cpp
-         TestClass.cpp
-         staticBox.cpp
-         Slider.cpp
-         Render.cpp
-     1>c:\users\dennis olsen\documents\github\ui-tron3k\02-opengl\render.cpp(23): warning C4018: '<': signed/unsigned mismatch
-     1>c:\users\dennis olsen\documents\github\ui-tron3k\02-opengl\render.cpp(53): warning C4018: '<': signed/unsigned mismatch
-     1>c:\users\dennis olsen\documents\github\ui-tron3k\02-opengl\render.cpp(78): warning C4018: '<': signed/unsigned mismatch
-     1>c:\users\dennis olsen\documents\github\ui-tron3k\02-opengl\render.cpp(89): warning C4552: '-': operator has no effect; expected operator with side-effect
-         main.cpp
-     1>c:\users\dennis olsen\documents\github\ui-tron3k\02-opengl\main.cpp(77): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
-     1>c:\users\dennis olsen\documents\github\ui-tron3k\02-opengl\main.cpp(83): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
-         InputBox.cpp
-         DynamicTextBox.cpp
-         Button.cpp
-         Generating Code...
-     1>c:\users\dennis olsen\documents\github\ui-tron3k\02-opengl\button.cpp(8): error C4716: 'Button::returnWorldMatrix': must return a value
-     1>c:\users\dennis olsen\documents\github\ui-tron3k\02-opengl\button.cpp(9): error C4716: 'Button::returnPositions': must return a value
-     1>c:\users\dennis olsen\documents\github\ui-tron3k\02-opengl\slider.cpp(10): error C4716: 'Slider::returnWorldMatrix': must return a value
-     1>c:\users\dennis olsen\documents\github\ui-tron3k\02-opengl\slider.cpp(9): error C4716: 'Slider::returnPositions': must return a value
-     1>c:\users\dennis olsen\documents\github\ui-tron3k\02-opengl\slider.cpp(12): error C4716: 'Slider::calcSound': must return a value
-     1>c:\users\dennis olsen\documents\github\ui-tron3k\02-opengl\staticbox.cpp(7): error C4716: 'StaticBox::returnPositions': must return a value
-     1>c:\users\dennis olsen\documents\github\ui-tron3k\02-opengl\ui.cpp(7): error C4716: 'UI::mouseColission': must return a value
-     1>c:\users\dennis olsen\documents\github\ui-tron3k\02-opengl\ui.cpp(8): error C4716: 'UI::pixelToScreenSpace': must return a value
-     1>c:\users\dennis olsen\documents\github\ui-tron3k\02-opengl\ui.cpp(6): error C4716: 'UI::loadUI': must return a value
+     1>c:\users\dennis olsen\documents\github\ui-tron3k\02-opengl\ui.cpp(144): warning C4700: uninitialized local variable 'counterButtons' used
+     1>c:\users\dennis olsen\documents\github\ui-tron3k\02-opengl\ui.cpp(154): warning C4700: uninitialized local variable 'counterSliders' used
+     1>c:\users\dennis olsen\documents\github\ui-tron3k\02-opengl\ui.cpp(199): warning C4700: uninitialized local variable 'counterStaticText' used
+     1>c:\users\dennis olsen\documents\github\ui-tron3k\02-opengl\ui.cpp(209): warning C4700: uninitialized local variable 'counterDynamicBox' used
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Iglm /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:prompt stb_image.c
+         stb_image.c
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Dennis Olsen\Documents\GitHub\UI-Tron3k\02-OpenGL\Debug\Demo.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\Dennis Olsen\Documents\GitHub\UI-Tron3k\02-OpenGL\Debug\Demo.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Dennis Olsen\Documents\GitHub\UI-Tron3k\02-OpenGL\Debug\Demo.lib" /MACHINE:X86 Debug\Button.obj
+         Debug\DynamicTextBox.obj
+         Debug\InputBox.obj
+         Debug\main.obj
+         Debug\Render.obj
+         Debug\Slider.obj
+         Debug\staticBox.obj
+         Debug\stb_image.obj
+         Debug\TestClass.obj
+         Debug\UI.obj
+         Debug\UIManager.obj
+         Debug\UIShader.obj
+     1>UI.obj : error LNK2019: unresolved external symbol "public: struct Vertex * __thiscall Slider::returnPosAUv(int)" (?returnPosAUv@Slider@@QAEPAUVertex@@H@Z) referenced in function "public: struct Vertex * __thiscall UI::returnPosAUv(int)" (?returnPosAUv@UI@@QAEPAUVertex@@H@Z)
+     1>UI.obj : error LNK2019: unresolved external symbol "public: void __thiscall Slider::scalePositions(int)" (?scalePositions@Slider@@QAEXH@Z) referenced in function "public: bool __thiscall UI::loadUI(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (?loadUI@UI@@QAE_NV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z)
+     1>C:\Users\Dennis Olsen\Documents\GitHub\UI-Tron3k\02-OpenGL\Debug\Demo.exe : fatal error LNK1120: 2 unresolved externals
      1>Done Building Project "C:\Users\Dennis Olsen\Documents\GitHub\UI-Tron3k\02-OpenGL\Demo.vcxproj" (Build target(s)) -- FAILED.
 
 Build FAILED.
 
-Time Elapsed 00:00:05.88
+Time Elapsed 00:00:01.37

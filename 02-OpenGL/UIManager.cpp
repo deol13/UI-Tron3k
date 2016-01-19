@@ -7,7 +7,7 @@ UIManager::UIManager()
 	nrOfFileNames = 0;
 	nrOfMenus = 0;
 	maxMenus = 5;
-
+	currentMenu = -1;
 }
 UIManager::~UIManager() 
 {
@@ -25,6 +25,7 @@ void UIManager::init(std::string* fileNames, int nrOfFiles)
 		fileNamesList[i] = fileNames[i];
 
 	menus = new UI[maxMenus];
+	currentMenu = 0;
 }
 
 //Add and remove menus
@@ -39,10 +40,9 @@ bool UIManager::addMenu(int fileId)
 			if (menus == nullptr)
 				menus = new UI[maxMenus];
 
-			menus[nrOfMenus].loadUI(fileNamesList[fileId]);
+			result = menus[nrOfMenus].loadUI(fileNamesList[fileId]);
 
 			nrOfMenus++;
-			result = true;
 		}
 		//else
 		//	std::cout << "Error: File name id out of range." << std::endl;
@@ -50,7 +50,9 @@ bool UIManager::addMenu(int fileId)
 	//else
 	//	std::cout << "Error: Max menus opened already." << std::endl;
 
-	return ;
+	currentMenu++;
+
+	return result;
 }
 bool UIManager::removeMenu(int menuId) 
 {
@@ -77,7 +79,9 @@ bool UIManager::removeMenu(int menuId)
 	//else
 	//	std::cout << "Error: No menus to remove." << std::endl;
 
-	return;
+	currentMenu--;
+
+	return result;
 }
 void UIManager::removeAllMenus() 
 {
@@ -86,7 +90,7 @@ void UIManager::removeAllMenus()
 		menus[i].clean();
 	}
 	nrOfMenus = 0;
-
+	currentMenu = -1;
 	delete menus;
 	menus = nullptr;
 }
@@ -94,4 +98,22 @@ void UIManager::removeAllMenus()
 int UIManager::collisionCheck(glm::vec2 pos, int whichMenu)
 {
 	return menus[whichMenu].mouseCollission(pos);
+}
+
+Vertex* UIManager::returnPosAUv(int id)
+{
+	return menus[currentMenu].returnPosAUv(id);
+}
+int* UIManager::returnTextureList()
+{
+	return menus[currentMenu].returnTextureList();
+}
+int UIManager::returnObjCount()
+{
+	return menus[currentMenu].returnObjCount();
+}
+
+glm::mat4 UIManager::returnWorldMatrix(int id)
+{
+	return menus[currentMenu].returnWorldMatrix(id);
 }

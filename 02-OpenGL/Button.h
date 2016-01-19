@@ -24,8 +24,10 @@ public:
 
 	void setWorldMatrix(float x, float y);
 	glm::mat4 returnWorldMatrix();
-	
-	void changeTexUsed(int use);
+	Vertex* returnPosAUv();
+	int returnObjId();
+
+	int changeTexUsed(int use);
 
 	void scalePositions(int scale);
 
