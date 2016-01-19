@@ -8,18 +8,13 @@
 class Slider
 {
 private:
-	Button theSlider;
-	StaticBox valueBoxes[2];
-	//Dynamic value box.
-
-	glm::mat4 worldMatrix;
+	Button backGround; //The button you click on.
+	Button pointer; //The one that moves
 
 public:
 	Slider();
+	Slider(glm::vec2 positions[], glm::vec2 uv[], int tex1, int tex2, int objId, int uniqueKey);
 	~Slider();
-
-	void addBox(int size, glm::vec3* positions, int* texId, int objId);
-
 
 	void setWorldMatirx(float x, float y);
 	glm::mat4 returnWorldMatrix();

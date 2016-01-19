@@ -5,8 +5,7 @@ Slider::~Slider() {}
 
 void Slider::addBox(int size, glm::vec3* positions, int* texId, int objId) {}
 
-void Slider::setWorldMatirx() {}
-glm::vec3 Slider::returnPositions() {}
+void Slider::setWorldMatirx(float x, float y) {}
 glm::mat4 Slider::returnWorldMatrix() {}
 
 int Slider::calcSound() {}

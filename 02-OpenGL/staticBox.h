@@ -2,22 +2,26 @@
 #ifndef STATICBOX_H
 #define STATICBOX_H
 
+#include "Vertex.h"
+
 #include <glm\glm.hpp>
 #include <glm\gtc\matrix_transform.hpp>
 
 class StaticBox
 {
 private:
-	int size;
-	glm::vec3* pos;
-	int texId;
-	int objId;
+	Vertex* pos;
+	int textureId;
+	int objectId;
+
+	glm::mat4 worldMatrix;
 public:
 	StaticBox();
-	StaticBox(int size, glm::vec3* positions, int* texId, int objId);
+	StaticBox( glm::vec2 positions[2], glm::vec2 UVs[2], int texId, int objId);
 	~StaticBox();
 
-	glm::vec3* returnPositions();
+	void setWorldMatrix(float x, float y);
+	glm::mat4 returnWorldMatrix();
 
 	void changeTexUsed();
 

@@ -10,9 +10,8 @@
 class Button
 {
 private:
-	int size;
 	Vertex* pos;
-	int* texList;
+	int texList[2];
 	int texInUse;
 	int objId;
 	int uniqueKey;
@@ -20,7 +19,7 @@ private:
 
 public:
 	Button();
-	Button(int size, glm::vec2 positions, glm::vec2 uv, int* texList, int objId, int uniqueKey);
+	Button( glm::vec2 positions[], glm::vec2 uv[], int tex1, int tex2, int objId, int uniqueKey);
 	~Button();
 
 	void setWorldMatrix(float x, float y);
@@ -28,7 +27,7 @@ public:
 	
 	void changeTexUsed(int use);
 
-	void scalePositions(int scaleX, int scaleY);
+	void scalePositions(int scale);
 
 	int checkCollision(glm::vec2 pos);
 };

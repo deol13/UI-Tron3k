@@ -11,6 +11,10 @@
 #include <vector>
 #include <string>
 
+#include <iostream>
+#include <fstream>
+#include <sstream>
+
 #include <glm\glm.hpp>
 #include <glm\gtc\matrix_transform.hpp>
 
@@ -24,13 +28,12 @@ private:
 	//InputBox* inputBoxes;
 
 	int* objIdList; //Used to change from the renders list to UI's list of objects.
-	int* texIdList;
 
 	int nrOfbuttons;
 	int nrOfsliders;
 	int nrOfstaticText;
-	//int nrOfdynamicTextBoxes;
-	//int nrOfinputBoxes;
+	int nrOfdynamicTextBoxes;
+	int nrOfinputBoxes;
 	int nrOfObjects;
 	int menuId;
 

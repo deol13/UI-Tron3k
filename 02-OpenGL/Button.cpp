@@ -2,9 +2,9 @@
 
 Button::Button()
 {
-	size = 0;
 	pos = nullptr;
-	texList = nullptr;
+	texList[0] = -1;
+	texList[1] = -1;
 	texInUse = -1;
 	objId = 0;
 	worldMatrix = { 1, 0, 0, 0,
@@ -14,19 +14,21 @@ Button::Button()
 					};
 	uniqueKey = -1;
 }
-Button::Button(int size, glm::vec2 positions, glm::vec2 uv,  int* texList, int objId, int uniqueKey)
+Button::Button(glm::vec2 positions[], glm::vec2 uv[], int tex1, int tex2, int objId, int uniqueKey)
 {
-	this->size = size;
-	pos = Vertex(positions.x, positions.y, uv.x, uv.y);
-	this->texList = texList;
+	pos = new Vertex[4]();
+	for (int i = 0; i < 4; i++)
+		pos[i] = Vertex(positions[i].x, positions[i].y, uv[i].x, uv[i].y);
+	texList[0] = tex1;
+	texList[1] = tex2;
 	this->objId = objId;
 	this->uniqueKey = uniqueKey;
 	texInUse = 0;
 }
 Button::~Button()
 {
-	if (pos != nullptr)
-		delete [] pos;
+	if (texList != nullptr)
+		delete [] texList;
 }
 
 void Button::setWorldMatrix(float x, float y) 
@@ -45,10 +47,11 @@ void Button::changeTexUsed(int use)
 	texInUse = texList[use];
 }
 
-void Button::scalePositions(int scaleX, int scaleY) 
+void Button::scalePositions(int scale) 
 {
-	worldMatrix[0].x = scaleX;
-	worldMatrix[1].y = scaleY;
+	worldMatrix[0].x = scale;
+	worldMatrix[1].y = scale;
+	worldMatrix[2].z = scale;
 }
 
 int Button::checkCollision(glm::vec2 mpos)
