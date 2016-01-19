@@ -7,25 +7,24 @@
 
 struct Vertex
 {
-	float x, y, z; 
+	float x, y; 
 	float u, v;
 	
 	Vertex(){}
 
-	Vertex( float tx, float ty, float tz , float tu, float tv )
+	Vertex( float tx, float ty, float tu, float tv )
 	{
 		x = tx;
 		y = ty;
-		z = tz;
 		u = tu;
 		v = tv;
 	}
 
 	~Vertex(){}
 
-	glm::vec3 getXYZ()
+	glm::vec2 getXY()
 	{
-		return glm::vec3(x, y, z);
+		return glm::vec2(x, y);
 	}
 };
 

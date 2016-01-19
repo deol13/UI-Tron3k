@@ -54,9 +54,9 @@ void Button::scalePositions(int scaleX, int scaleY)
 int Button::checkCollision(glm::vec2 mpos)
 {
 	int returnValue = -1;
-	if (mpos.x >= pos[0].x && mpos.x <= pos[3].x)
+	if (mpos.x >= pos[1].x && mpos.x <= pos[2].x)
 	{
-		if (mpos.y <= pos[0].x && mpos.y >= pos[3].y)
+		if (mpos.y >= pos[1].y && mpos.y <= pos[2].y)
 		{
 			returnValue = uniqueKey;
 		}
