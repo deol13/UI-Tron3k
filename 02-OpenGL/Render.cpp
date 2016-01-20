@@ -9,7 +9,7 @@ Render::Render()
 	textureCount = 0;
 	gShaderUI = 0;
 	uiShader = nullptr;
-	txtFileCount = 1;
+	txtFileCount = 2;
 	txtFileName = nullptr;
 
 	//Allocate memory
@@ -39,6 +39,7 @@ void Render::init(TestClass tester[])
 
 	txtFileName = new std::string[txtFileCount];
 	txtFileName[0] = std::string("test.txt");
+	txtFileName[1] = std::string("test2.txt");
 
 	/*Start Menu*/
 	manager.init(txtFileName, txtFileCount);
@@ -52,7 +53,10 @@ void Render::uiRenderPass()
 {
 	glUseProgram(gShaderUI);
 
-	changeTexCounter++;
+	if (!changeMenu)
+		changeTexCounter++;
+	else
+		changeTexCounter--;
 
 	//Go through the list of buttons and render them
 	for (size_t i = 0; i < nrOfButtons; i++)
@@ -73,18 +77,27 @@ void Render::uiRenderPass()
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 	}
 
-	if (changeTexCounter == 100)
-	{
-		changeTex(manager.changeTex(0), 0);
-		changeTex(manager.changeTex(1), 1);
-		changeTexCounter = 0;
-	}
-	//if (changeTexCounter == 100)
+	//if (changeTexCounter == 100) //Change texture
 	//{
 	//	changeTex(manager.changeTex(0), 0);
 	//	changeTex(manager.changeTex(1), 1);
 	//	changeTexCounter = 0;
 	//}
+	if (changeTexCounter == 600) //change menu
+	{
+		if(manager.addMenu(1))
+		{
+			newBuffers(manager.returnObjCount(), manager.returnTextureList());
+			changeMenu = true;
+		}
+	}
+	if (changeTexCounter == -1)
+	{
+		if (manager.removeMenu(currentMenu))
+		{
+			removeMenu();
+		}
+	}
 
 	GLenum error = glGetError();
 	if (error != GL_NO_ERROR)
@@ -255,4 +268,9 @@ glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, x, y, 0, GL_RGBA, GL_UNSIGNED_BYTE, text
 void Render::changeTex(int texListIndex, int whichButton)
 {
 	vertexRenderBuffers[currentMenu].textureIDs[whichButton] = textureList[texListIndex];
+}
+
+void Render::removeMenu()
+{
+	cleanUp(currentMenu);
 }

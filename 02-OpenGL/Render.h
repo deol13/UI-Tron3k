@@ -43,6 +43,7 @@ private:
 	int txtFileCount;
 
 	int changeTexCounter = 0;
+	bool changeMenu = false;
 public:
 	Render();
 	~Render();
@@ -64,6 +65,8 @@ public:
 	int mouseHoverCheck(float mx, float my);
 
 	void changeTex(int texListIndex, int whichButton);
+
+	void removeMenu();
 };
 
 #endif

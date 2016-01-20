@@ -204,15 +204,15 @@ bool UI::loadUI(std::string fileName)
 				}
 
 				getline(myfile, inputString); //tex1
-				tex1 = std::stoi(inputString);
+				textureId1 = std::stoi(inputString);
 
 				getline(myfile, inputString); //scale
 				scale = std::stoi(inputString);
 
-				staticText[counterStaticText] = StaticBox(xy, uv, tex1, counter);
+				staticText[counterStaticText] = StaticBox(xy, uv, textureId1, counter);
 				staticText[counterStaticText].scalePositions(scale);
 				objIdList[counter] = counterStaticText;
-				textureList[counter] = tex1;
+				textureList[counter] = textureId1;
 				counterStaticText++;
 				result = true;
 			}
