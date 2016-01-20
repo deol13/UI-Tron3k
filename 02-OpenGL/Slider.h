@@ -24,7 +24,7 @@ public:
 
 	bool checkCollision(glm::vec2 pos);
 
-	void scalePositions(int scale);
+	void scalePositions(int scale, int objId);
 };
 
 #endif

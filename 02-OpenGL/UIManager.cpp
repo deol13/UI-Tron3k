@@ -21,11 +21,12 @@ UIManager::~UIManager()
 void UIManager::init(std::string* fileNames, int nrOfFiles)
 {
 	nrOfFileNames = nrOfFiles;
+	fileNamesList = new std::string[nrOfFileNames];
+
 	for (size_t i = 0; i < nrOfFileNames; i++)
 		fileNamesList[i] = fileNames[i];
 
 	menus = new UI[maxMenus];
-	currentMenu = 0;
 }
 
 //Add and remove menus
@@ -116,4 +117,9 @@ int UIManager::returnObjCount()
 glm::mat4 UIManager::returnWorldMatrix(int id)
 {
 	return menus[currentMenu].returnWorldMatrix(id);
+}
+
+int UIManager::changeTex(int objId)
+{
+	return menus[currentMenu].changeTex(objId);
 }

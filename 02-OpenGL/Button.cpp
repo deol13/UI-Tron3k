@@ -2,10 +2,9 @@
 
 Button::Button()
 {
-	pos = nullptr;
-	texList[0] = -1;
-	texList[1] = -1;
-	texInUse = -1;
+	textureIndexList[0] = -1;
+	textureIndexList[1] = -1;
+	textureIndexInUse = -1;
 	objId = 0;
 	worldMatrix = { 1, 0, 0, 0,
 					0, 1, 0, 0,
@@ -14,22 +13,17 @@ Button::Button()
 					};
 	uniqueKey = -1;
 }
-Button::Button(glm::vec2 positions[], glm::vec2 uv[], int tex1, int tex2, int objId, int uniqueKey)
+Button::Button(glm::vec2 positions[], glm::vec2 uv[], int textureId1, int textureId2, int objId, int uniqueKey)
 {
-	pos = new Vertex[4]();
 	for (int i = 0; i < 4; i++)
 		pos[i] = Vertex(positions[i].x, positions[i].y, uv[i].x, uv[i].y);
-	texList[0] = tex1;
-	texList[1] = tex2;
+	textureIndexList[0] = textureId1;
+	textureIndexList[1] = textureId2;
 	this->objId = objId;
 	this->uniqueKey = uniqueKey;
-	texInUse = 0;
+	textureIndexInUse = textureId1;
 }
-Button::~Button()
-{
-	if (texList != nullptr)
-		delete [] texList;
-}
+Button::~Button() {}
 
 void Button::setWorldMatrix(float x, float y) 
 {
@@ -52,10 +46,14 @@ int Button::returnObjId()
 	return objId;
 }
 
-int Button::changeTexUsed(int use) 
+int Button::changeTexUsed() 
 {
-	texInUse = texList[use];
-	return texInUse;
+	if(textureIndexInUse == textureIndexList[0])
+		textureIndexInUse = textureIndexList[1];
+	else
+		textureIndexInUse = textureIndexList[0];
+
+	return textureIndexInUse;
 }
 
 void Button::scalePositions(int scale) 

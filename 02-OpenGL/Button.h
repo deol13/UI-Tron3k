@@ -10,16 +10,16 @@
 class Button
 {
 private:
-	Vertex* pos;
-	int texList[2];
-	int texInUse;
+	Vertex pos[4];
+	int textureIndexList[2];
+	int textureIndexInUse;
 	int objId;
 	int uniqueKey;
 	glm::mat4 worldMatrix;
 
 public:
 	Button();
-	Button( glm::vec2 positions[], glm::vec2 uv[], int tex1, int tex2, int objId, int uniqueKey);
+	Button( glm::vec2 positions[], glm::vec2 uv[], int textureId1, int textureId2, int objId, int uniqueKey);
 	~Button();
 
 	void setWorldMatrix(float x, float y);
@@ -27,7 +27,7 @@ public:
 	Vertex* returnPosAUv();
 	int returnObjId();
 
-	int changeTexUsed(int use);
+	int changeTexUsed();
 
 	void scalePositions(int scale);
 

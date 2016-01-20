@@ -10,7 +10,7 @@
 class StaticBox
 {
 private:
-	Vertex* pos;
+	Vertex pos[4];
 	int textureId;
 	int objectId;
 

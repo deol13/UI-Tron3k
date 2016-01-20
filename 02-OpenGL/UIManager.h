@@ -34,6 +34,8 @@ public:
 	Vertex* returnPosAUv(int id);
 	int* returnTextureList();
 	glm::mat4 returnWorldMatrix(int id);
+
+	int changeTex(int objId);
 };
 
 #endif

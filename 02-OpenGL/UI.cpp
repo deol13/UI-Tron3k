@@ -28,21 +28,33 @@ UI::~UI()
 void UI::clean()
 {
 	if (buttons != nullptr)
-		delete [] buttons;
+		delete[] buttons;
 	if (sliders != nullptr)
-		delete [] sliders;
+		delete[] sliders;
 	if (staticText != nullptr)
-		delete [] staticText;
+		delete[] staticText;
 	//if (dynamicTextBoxes != nullptr)
-	//	delete [] dynamicTextBoxes;
+	//	delete[] dynamicTextBoxes;
 	//if (inputBoxes != nullptr)
-	//	delete [] inputBoxes;
+	//	delete[] inputBoxes;
 	if (objIdList != nullptr)
-		delete [] objIdList;
+		delete[] objIdList;
+	if (textureList != nullptr)
+		delete[] textureList;
+
+	buttons = nullptr;
+	sliders = nullptr;
+	staticText = nullptr;
+	//dynamicTextBoxes = nullptr;
+	//inputBoxes = nullptr;
+
+	objIdList = nullptr;
+	textureList = nullptr;
 
 	nrOfObjects = 0;
 	menuId = 0;
 }
+
 void UI::changeMenuId()
 {
 	menuId--;
@@ -60,7 +72,8 @@ bool UI::loadUI(std::string fileName)
 		//Variables for the while loop
 		std::string inputString;
 		int convertedResult = -1;
-		int x, y, u, v, tex1, tex2, scale, counter, uniqueKey, counterButtons, counterSliders, counterStaticText, counterDynamicBox, counterInputBoxes = 0;
+		float x = -1.0f, y = -1.0f, u = -1.0f, v = -1.0f;
+		int textureId1 = -1, textureId2 = -1, scale = -1, counter = 0, uniqueKey = 0, counterButtons = 0, counterSliders = 0, counterStaticText = 0, counterDynamicBox = 0, counterInputBoxes = 0;
 
 		//Number of objects
 		getline(myfile, inputString);
@@ -83,24 +96,23 @@ bool UI::loadUI(std::string fileName)
 
 		if (nrOfbuttons > 0)
 			buttons = new Button[nrOfbuttons];
-		if (nrOfsliders)
+		if (nrOfsliders > 0)
 			sliders = new Slider[nrOfsliders];
-		if (nrOfstaticText)
+		if (nrOfstaticText > 0)
 			staticText = new StaticBox[nrOfstaticText];
-		//if (nrOfdynamicTextBoxes)
+		//if (nrOfdynamicTextBoxes > 0)
 		//	dynamicTextBoxes = new DynamicTextBox[nrOfdynamicTextBoxes];
-		//if (nrOfinputBoxes)
+		//if (nrOfinputBoxes > 0)
 		//	inputBoxes = new InputBox[nrOfinputBoxes];
 
 		//Allocate memory
 		objIdList = new int[nrOfObjects];
 		textureList = new int[nrOfObjects];
 
-		while (myfile.eof()) //Looping through the file until there is nothing left to read.
+		while (!myfile.eof()) //Looping through the file until there is nothing left to read.
 		{
 			getline(myfile, inputString); //Get the class key to see which class object that needs to be created.
 			convertedResult = std::stoi(inputString);
-
 
 			if (convertedResult == 0 || convertedResult == 1) //Button or Slider class
 			{
@@ -109,14 +121,14 @@ bool UI::loadUI(std::string fileName)
 				glm::vec2 uv[4];
 				std::stringstream ss("");
 
-				for (int i = 0; i < 4; i++)
+				for (int i = 0; i < 4; i++) //stoi doesn't work with decimals
 				{
 					getline(myfile, inputString); //X, Y
 					ss = std::stringstream(inputString);
 					ss >> temp;
-					x = std::stoi(temp);
+					x = std::stof(temp);
 					ss >> temp;
-					y = std::stoi(temp);
+					y = std::stof(temp);
 
 					getline(myfile, inputString); //U, V
 					ss = std::stringstream(inputString);
@@ -131,9 +143,9 @@ bool UI::loadUI(std::string fileName)
 				}
 
 					getline(myfile, inputString); //tex1
-					tex1 = std::stoi(inputString);
+					textureId1 = std::stoi(inputString);
 					getline(myfile, inputString); //tex2
-					tex2 = std::stoi(inputString);
+					textureId2 = std::stoi(inputString);
 					getline(myfile, inputString); //uniqueKey
 					uniqueKey = std::stoi(inputString);
 					getline(myfile, inputString); //scale
@@ -141,24 +153,25 @@ bool UI::loadUI(std::string fileName)
 
 				if (convertedResult == 0)
 				{
-					buttons[counterButtons] = Button(xy, uv, tex1, tex2, counter, uniqueKey);
+					buttons[counterButtons] = Button(xy, uv, textureId1, textureId2, counter, uniqueKey);
 					buttons[counterButtons].scalePositions(scale);
 					objIdList[counter] = counterButtons;
-					textureList[counter] = tex1;
+					textureList[counter] = textureId1;
 					counterButtons++;
 					result = true;
 				}
 				else
 				{
 					//SLider
-					sliders[counterSliders] = Slider(xy, uv, tex1, tex2, counter, uniqueKey);
-					sliders[counterButtons].scalePositions(scale);
+					sliders[counterSliders] = Slider(xy, uv, textureId1, textureId2, counter, uniqueKey);
+					sliders[counterButtons].scalePositions(scale, counter);
 					objIdList[counter] = counterSliders;
-					textureList[counter] = tex1;
+					textureList[counter] = textureId1;
 					counter++;
 					//Button 2 that will be made in the slider class
+					sliders[counterButtons].scalePositions(scale, counter);
 					objIdList[counter] = counterSliders;
-					textureList[counter] = tex2;
+					textureList[counter] = textureId2;
 					counterSliders++;
 					result = true;
 				}
@@ -175,9 +188,9 @@ bool UI::loadUI(std::string fileName)
 					getline(myfile, inputString); //X, Y
 					ss = std::stringstream(inputString);
 					ss >> temp;
-					x = std::stoi(temp);
+					x = std::stof(temp);
 					ss >> temp;
-					y = std::stoi(temp);
+					y = std::stof(temp);
 
 					getline(myfile, inputString); //U, V
 					ss = std::stringstream(inputString);
@@ -298,13 +311,40 @@ void UI::setWorldMatrix(float x, float y, int objId)
 }
 glm::mat4 UI::returnWorldMatrix(int objId)
 {
-	return sliders[objIdList[objId]].returnWorldMatrix(objId);
+	int index = objIdList[objId];
+	glm::mat4 tmp = { 1, 0, 0, 0,
+					  0, 1, 0, 0,
+					  0, 0, 1, 0,
+					  0, 0, 0, 0
+						};
+
+	if (index >= 0 && index < nrOfbuttons)
+	{
+		tmp = buttons[index].returnWorldMatrix();
+	}
+	else if (index >= nrOfbuttons && index < nrOfsliders)
+	{
+		tmp = sliders[index].returnWorldMatrix(objId);
+	}
+	else if (index >= nrOfsliders && index < nrOfstaticText)
+	{
+		tmp = staticText[index].returnWorldMatrix();
+	}
+	else if (index >= nrOfstaticText && index < nrOfdynamicTextBoxes)
+	{
+		//tmp = dynamicTextBoxes[index].returnWorldMatrix();
+	}
+	else if (index >= nrOfdynamicTextBoxes && index < nrOfinputBoxes)
+	{
+		//tmp = inputBoxes[index].returnWorldMatrix();
+	}
+
+	return tmp;
 }
 
 Vertex* UI::returnPosAUv(int id)
 {
 	int index = objIdList[id];
-
 	Vertex* tmp = nullptr;
 	
 	if (index >= 0 && index < nrOfbuttons)
@@ -337,4 +377,11 @@ int* UI::returnTextureList()
 int UI::returnObjCount()
 {
 	return nrOfObjects;
+}
+
+int UI::changeTex(int objId)
+{
+	int index = objIdList[objId];
+
+	return buttons[index].changeTexUsed();
 }

@@ -9,6 +9,8 @@ Render::Render()
 	textureCount = 0;
 	gShaderUI = 0;
 	uiShader = nullptr;
+	txtFileCount = 1;
+	txtFileName = nullptr;
 
 	//Allocate memory
 	uiShader = new UIShader(&gShaderUI);
@@ -23,7 +25,9 @@ Render::~Render()
 	for (size_t i = 0; i < nrOfMenus; i++)
 		vertexRenderBuffers[i].clean();
 	
+
 	delete[] vertexRenderBuffers;
+	delete[] txtFileName;
 	delete uiShader;
 	glDeleteShader(gShaderUI);
 }
@@ -32,15 +36,14 @@ void Render::init(TestClass tester[])
 {
 	//Load all the textures
 	loadTextures();
-	
-	std::string* txtFileName = new std::string("test.txt");
+
+	txtFileName = new std::string[txtFileCount];
+	txtFileName[0] = std::string("test.txt");
 
 	/*Start Menu*/
-	manager.init(txtFileName, textureCount);
+	manager.init(txtFileName, txtFileCount);
 	manager.addMenu(0);
 	newBuffers(manager.returnObjCount(), manager.returnTextureList());
-
-	delete txtFileName;
 }
 
 void Render::update() {}
@@ -49,12 +52,15 @@ void Render::uiRenderPass()
 {
 	glUseProgram(gShaderUI);
 
+	changeTexCounter++;
+
 	//Go through the list of buttons and render them
 	for (size_t i = 0; i < nrOfButtons; i++)
 	{
+		int tmp = vertexRenderBuffers[currentMenu].textureIDs[i];
 		//Activate the buttons texture
 		glActiveTexture(GL_TEXTURE0 + i);
-		glBindTexture(GL_TEXTURE_2D, vertexRenderBuffers[currentMenu].textureIDs[i]);
+		glBindTexture(GL_TEXTURE_2D, tmp);
 
 		//Texture Sample sent to the gpu
 		glProgramUniform1i(gShaderUI, uiShader->texture, i);
@@ -66,6 +72,19 @@ void Render::uiRenderPass()
 
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 	}
+
+	if (changeTexCounter == 100)
+	{
+		changeTex(manager.changeTex(0), 0);
+		changeTex(manager.changeTex(1), 1);
+		changeTexCounter = 0;
+	}
+	//if (changeTexCounter == 100)
+	//{
+	//	changeTex(manager.changeTex(0), 0);
+	//	changeTex(manager.changeTex(1), 1);
+	//	changeTexCounter = 0;
+	//}
 
 	GLenum error = glGetError();
 	if (error != GL_NO_ERROR)
@@ -99,7 +118,7 @@ void Render::cleanUp(int id) //Needs to be put together with UIManager clean up
 	}
 }
 
-void Render::newBuffers(int objCount, int textureIdList[]) //Needs to changed
+void Render::newBuffers(int objCount, int textureIdList[])
 {
 	//Check so we are not going over the limit of opened menues.
 	if (nrOfMenus + 1 <= 4)
@@ -121,7 +140,8 @@ void Render::newBuffers(int objCount, int textureIdList[]) //Needs to changed
 			createBuffers(i);
 
 			//Set the list of texture ids
-			vertexRenderBuffers[currentMenu].textureIDs[i] = textureList[textureIdList[i]];
+			int tmp = textureList[textureIdList[i]];
+			vertexRenderBuffers[currentMenu].textureIDs[i] = tmp;
 		}
 	}
 }
@@ -131,7 +151,7 @@ void Render::createBuffers(int id)
 	//create buffer and set data
 	glGenBuffers(1, &vertexRenderBuffers[currentMenu].gVertexBuffer[id]);
 	glBindBuffer(GL_ARRAY_BUFFER, vertexRenderBuffers[currentMenu].gVertexBuffer[id]);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * 4, &manager.returnPosAUv(currentMenu)[0], GL_STATIC_DRAW); // &tester[id].posList[0] bytt ut mot UIs buttons Vertex
+	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * 4, &manager.returnPosAUv(id)[0], GL_STATIC_DRAW); // &tester[id].posList[0] bytt ut mot UIs buttons Vertex
 
 	//define vertex data layout
 	glGenVertexArrays(1, &vertexRenderBuffers[currentMenu].gVertexAttribute[id]);
@@ -213,7 +233,6 @@ void Render::loadTextures()
 }
 
 
-
 int Render::mouseClick(float mx, float my) 
 { 
 	//UI->;
@@ -232,3 +251,8 @@ glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, x, y, 0, GL_RGBA, GL_UNSIGNED_BYTE, textureData);
 */
+
+void Render::changeTex(int texListIndex, int whichButton)
+{
+	vertexRenderBuffers[currentMenu].textureIDs[whichButton] = textureList[texListIndex];
+}

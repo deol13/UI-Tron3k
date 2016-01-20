@@ -38,6 +38,11 @@ private:
 	int nrOfMenus; //Total of menus open att the moment
 
 	UIManager manager;
+
+	std::string* txtFileName;
+	int txtFileCount;
+
+	int changeTexCounter = 0;
 public:
 	Render();
 	~Render();
@@ -57,6 +62,8 @@ public:
 
 	int mouseClick(float mx, float my);
 	int mouseHoverCheck(float mx, float my);
+
+	void changeTex(int texListIndex, int whichButton);
 };
 
 #endif

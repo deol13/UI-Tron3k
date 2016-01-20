@@ -56,6 +56,7 @@ public:
 	Vertex* returnPosAUv(int id);
 	int* returnTextureList();
 	int returnObjCount();
+	int changeTex(int objId);
 
 	//Hover function, den ska ändra på textureList eftersom en buttons texture ändras
 };

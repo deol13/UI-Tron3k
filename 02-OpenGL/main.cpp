@@ -23,6 +23,8 @@ void testData();
 
 Render* render;
 
+int FPScap = 60;
+
 /*****************Test**********************/
 TestClass tester[5];
 Vertex objOne[4];
@@ -55,12 +57,13 @@ int WINAPI wWinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdL
 
 		SetViewport(); //4. Sätt viewport
 
+		glDisable(GL_DEPTH_TEST);
+
 		/************Test to see if the program works***********/
 		//testData();
 		
 		render = new Render();
 		render->init(tester);
-		render->newBuffers(5, idTexList);
 		/*******************************************************/
 
 
@@ -68,6 +71,7 @@ int WINAPI wWinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdL
 
 		while (WM_QUIT != msg.message)
 		{
+			Sleep(1000 / FPScap);
 			if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
 			{
 				if (msg.message == MK_LBUTTON)
